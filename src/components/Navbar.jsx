@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [show, setShow] = useState(sessionStorage.getItem("id"));
+
+  useEffect(() => {
+    if (sessionStorage.getItem("auth") == true) {
+      setShow(false);
+    }
+  }, [show]);
   return (
     <div className="navbar bg-base-100 px-20 shadow shadow-lg">
       <div className="flex-1 ">

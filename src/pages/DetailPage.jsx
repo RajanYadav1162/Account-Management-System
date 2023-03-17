@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Navigate, useNavigate, useNavigation } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { getCustomer } from "../api/cutomer";
 import Deposit from "../components/Deposit";
 import Transaction from "../components/Transactions";
@@ -11,6 +11,11 @@ const DetailPage = () => {
   const [isWithdraw, setIsWithdraw] = useState(false);
   const [isTransaction, setIsTransaction] = useState(true);
   const [style, setStyle] = useState("btn-success tab-active");
+  const navigate = useNavigate();
+  const logouthandler = () => {
+    sessionStorage.clear();
+    return navigate("/");
+  };
 
   const btnHandler = (type) => {
     if (type == "deposit") {
@@ -51,6 +56,12 @@ const DetailPage = () => {
             <div>
               Session Expires is : <span className="text-xl">04:20 </span>mins
             </div>
+            <button
+              className="btn btn-error btn-wide mt-6"
+              onClick={logouthandler}
+            >
+              logout
+            </button>
           </div>
           <div className="flex flex-col justify-center items-center h-[80vh] gap-y-20 tabs ">
             <div
