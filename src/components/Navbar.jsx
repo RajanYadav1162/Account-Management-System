@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const [show, setShow] = useState(sessionStorage.getItem("id"));
   return (
     <div className="navbar bg-base-100 px-20 shadow shadow-lg">
       <div className="flex-1 ">
@@ -10,18 +12,34 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1 text-lg font-bold flex gap-x-2">
-          <li>
-            <Link to="/login" className="hover:border hover:border-orange-700">
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link to="/signup" className="hover:border hover:border-orange-700">
-              Signup
-            </Link>
-          </li>
-        </ul>
+        {show == null && (
+          <ul className="menu menu-horizontal px-1 text-lg font-bold flex gap-x-2">
+            <li>
+              <Link
+                to="/login"
+                className="hover:border hover:border-orange-700"
+              >
+                Login
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/signup"
+                className="hover:border hover:border-orange-700"
+              >
+                Signup
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/detail"
+                className="hover:border hover:border-orange-700"
+              >
+                Dashboard
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
