@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import DetailPage from "./pages/DetailPage";
@@ -9,6 +10,7 @@ import SignupPage from "./pages/SignupPage";
 const App = () => {
   return (
     <main className="flex flex-col justify-between h-[130vh]">
+      <ToastContainer theme="dark" />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />

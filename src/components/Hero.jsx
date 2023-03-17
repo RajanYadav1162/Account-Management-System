@@ -16,8 +16,8 @@ const Hero = () => {
             to help you with your banking needs.We provide you with a wide range
             of services to help you manage your money.
           </p>
-          <Link to="/signup" className="btn btn-primary btn-wide">
-            Register
+          <Link to="/detail" className="btn btn-primary btn-wide">
+            Dashboard
           </Link>
         </div>
       </div>

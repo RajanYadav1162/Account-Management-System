@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { Navigate, useNavigate, useNavigation } from "react-router-dom";
 import { getCustomer } from "../api/cutomer";
 import Deposit from "../components/Deposit";
 import Transaction from "../components/Transactions";
@@ -29,10 +30,13 @@ const DetailPage = () => {
     }
   };
 
-  const { data, error, isError, isLoading } = useQuery(["customers"], () =>
-    getCustomer(1)
-  );
+  const { data, error, isError, isLoading } = useQuery(["customers"], () => {
+    return getCustomer(sessionStorage.getItem("id"));
+  });
 
+  if (sessionStorage.getItem("id") == null) {
+    return <Navigate to="/login" replace />;
+  }
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -80,8 +84,8 @@ const DetailPage = () => {
           {/* for different tabls */}
           <div className="w-screen h-[0.1px] bg-gray-800 mb-6"></div>
           {isTransaction && <Transaction data={data} />}
-          {isDeposit && <Deposit />}
-          {isWithdraw && <Withdraw />}
+          {isDeposit && <Deposit data={data} />}
+          {isWithdraw && <Withdraw data={data} />}
         </div>
       </div>
     </div>
